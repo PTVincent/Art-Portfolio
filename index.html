@@ -1062,6 +1062,32 @@
     font-weight: 700;
   }
 
+  /* End-of-entry CTA — turns brand traffic into commission traffic */
+  .story-cta {
+    margin-top: 2.6rem;
+    padding-top: 1.8rem;
+    text-align: center;
+    border-top: 1px solid rgba(201, 162, 74, 0.18);
+  }
+  .story-cta-divider {
+    color: var(--gold);
+    font-size: 0.9rem;
+    letter-spacing: 0.4em;
+    margin-bottom: 0.9rem;
+    opacity: 0.7;
+  }
+  .story-cta-text {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    color: var(--parchment-dark);
+    font-size: 0.98rem;
+    margin-bottom: 1rem;
+  }
+  .story-cta-btn {
+    font-size: 0.75rem;
+    padding: 0.7rem 1.4rem;
+  }
+
   .book-nav {
     display: flex;
     justify-content: space-between;
@@ -1575,6 +1601,48 @@
   }
   .form-status.error { color: #d99898; }
   .form-status.success { color: #8fcf90; }
+
+  /* Collapsible "More details (optional)" — matches the rest of the form */
+  .form-more {
+    margin-top: 1.4rem;
+    border-top: 1px solid rgba(201, 162, 74, 0.18);
+    padding-top: 1.2rem;
+  }
+  .form-more > summary {
+    cursor: pointer;
+    list-style: none;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--twilight-glow);
+    padding: 0.4rem 0;
+    user-select: none;
+    transition: color 0.2s ease;
+  }
+  .form-more > summary::-webkit-details-marker { display: none; }
+  .form-more > summary::before {
+    content: '＋ ';
+    color: var(--gold);
+    margin-right: 0.4rem;
+    transition: transform 0.2s ease;
+    display: inline-block;
+  }
+  .form-more[open] > summary::before { content: '－ '; }
+  .form-more > summary:hover { color: var(--twilight-bright); }
+  .form-more > summary .optional {
+    color: var(--parchment-dark);
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0;
+    margin-left: 0.5rem;
+    font-size: 0.95em;
+  }
+  .form-more[open] > .form-field,
+  .form-more[open] > .form-row {
+    margin-top: 1.1rem;
+  }
 
   @media (max-width: 720px) {
     .commission-form { padding: 2rem 1.3rem; }
@@ -2319,7 +2387,7 @@
   <div class="slot-status" role="status" aria-live="polite">
     <span class="dot" aria-hidden="true"></span>
     <span class="status-label">Status</span>
-    <span class="status-text">Open for May commissions — 5 of 5 slots available</span>
+    <span class="status-text">Now booking May commissions — limited slots available</span>
   </div>
 
   <!-- HERO -->
@@ -2347,7 +2415,7 @@
     </div>
 
     <p class="subtitle">
-      I bring characters, creatures, and worlds to life for tabletop players, dungeon masters, and fellow world-builders. From sunlit kingdoms to the dark places at their edges, every commission is its own story.
+      Hand-painted character, creature, and environment art for tabletop players, DMs, and worldbuilders. Commissions starting at $65.
     </p>
 
     <div class="cta-row">
@@ -2356,6 +2424,30 @@
     </div>
 
     <div class="scroll-cue">↓ Scroll</div>
+  </section>
+
+  <!-- FEATURED TEASER — now sits right after the hero so the first thing
+       a visitor sees is the work itself. About moves below it. -->
+  <section class="featured reveal" id="featured-section" style="display:none;">
+    <h2 class="section-title">Selected Work</h2>
+    <div class="section-subtitle">A glimpse of what I do</div>
+    <div class="divider">
+      <svg viewBox="0 0 240 20" xmlns="http://www.w3.org/2000/svg">
+        <line x1="0" y1="10" x2="100" y2="10" stroke="#c9a24a" stroke-width="0.8" opacity="0.6"/>
+        <line x1="140" y1="10" x2="240" y2="10" stroke="#c9a24a" stroke-width="0.8" opacity="0.6"/>
+        <path d="M100 10 L115 4 L120 10 L115 16 Z" fill="#c9a24a"/>
+        <path d="M140 10 L125 4 L120 10 L125 16 Z" fill="#c9a24a"/>
+        <circle cx="120" cy="10" r="2.5" fill="#e7c875"/>
+      </svg>
+    </div>
+
+    <div class="featured-grid" id="featured-grid">
+      <!-- populated by JS -->
+    </div>
+
+    <div style="text-align:center; margin-top:4rem;">
+      <a class="btn ghost" data-route="gallery">See the Full Gallery →</a>
+    </div>
   </section>
 
   <!-- ABOUT -->
@@ -2418,33 +2510,10 @@
     </div>
   </div>
 
-  <!-- FEATURED TEASER -->
-  <section class="featured reveal" id="featured-section" style="display:none;">
-    <h2 class="section-title">Selected Work</h2>
-    <div class="section-subtitle">A glimpse of what I do</div>
-    <div class="divider">
-      <svg viewBox="0 0 240 20" xmlns="http://www.w3.org/2000/svg">
-        <line x1="0" y1="10" x2="100" y2="10" stroke="#c9a24a" stroke-width="0.8" opacity="0.6"/>
-        <line x1="140" y1="10" x2="240" y2="10" stroke="#c9a24a" stroke-width="0.8" opacity="0.6"/>
-        <path d="M100 10 L115 4 L120 10 L115 16 Z" fill="#c9a24a"/>
-        <path d="M140 10 L125 4 L120 10 L125 16 Z" fill="#c9a24a"/>
-        <circle cx="120" cy="10" r="2.5" fill="#e7c875"/>
-      </svg>
-    </div>
-
-    <div class="featured-grid" id="featured-grid">
-      <!-- populated by JS -->
-    </div>
-
-    <div style="text-align:center; margin-top:4rem;">
-      <a class="btn ghost" data-route="gallery">See the Full Gallery →</a>
-    </div>
-  </section>
-
   <!-- CRAFT / COMMISSIONS -->
   <!-- COMMISSIONS / PRICING -->
-  <!-- Pricing per the 2026 report: Bust $85 / Half-body $165 (most popular) / Full-body $275.
-       Scenes & complex work anchored at $400+ as request-quote. Add-ons strip below. -->
+  <!-- Pricing: Bust $65 / Half-body $130 (most popular) / Full-body $210.
+       Scenes & complex work from $325 as request-quote. Add-ons strip below. -->
   <section class="pricing reveal" id="commissions">
     <h2 class="section-title">Commissions</h2>
     <div class="section-subtitle">Pricing &amp; Tiers</div>
@@ -2461,7 +2530,7 @@
     <div class="pricing-grid">
       <div class="pricing-card reveal reveal-delay-1">
         <h4>Bust</h4>
-        <div class="price"><span class="currency">$</span>50</div>
+        <div class="price"><span class="currency">$</span>65</div>
         <div class="price-note">Head &amp; Shoulders</div>
         <div class="tier-divider"></div>
         <ul>
@@ -2476,7 +2545,7 @@
       <div class="pricing-card featured reveal reveal-delay-2">
         <div class="pop-badge">Most Popular</div>
         <h4>Half-body</h4>
-        <div class="price"><span class="currency">$</span>100</div>
+        <div class="price"><span class="currency">$</span>130</div>
         <div class="price-note">Waist Up · Full Detail</div>
         <div class="tier-divider"></div>
         <ul>
@@ -2490,7 +2559,7 @@
 
       <div class="pricing-card reveal reveal-delay-3">
         <h4>Full-body</h4>
-        <div class="price"><span class="currency">$</span>150</div>
+        <div class="price"><span class="currency">$</span>210</div>
         <div class="price-note">Head to Toe · Hero Pose</div>
         <div class="tier-divider"></div>
         <ul>
@@ -2504,7 +2573,7 @@
     </div>
 
     <div class="pricing-aux">
-      <p><strong>Scenes, party illustrations, environments &amp; creature design</strong> — from <strong>$250</strong>. These are scoped per project; reach out with what you have in mind and I'll send a quote.</p>
+      <p><strong>Scenes, party illustrations, environments &amp; creature design</strong> — from <strong>$325</strong>. These are scoped per project; reach out with what you have in mind and I'll send a quote.</p>
 
       <div class="addons-strip" aria-label="Common add-ons">
         <span class="addon-pill"><span class="plus">+</span>60% per additional character</span>
@@ -2606,6 +2675,9 @@
       </div>
     </div>
   </section>
+
+  <!-- TESTIMONIALS — opening tag was missing; JS toggles display via #testimonials-section -->
+  <section class="testimonials reveal" id="testimonials-section" style="display:none;">
     <h2 class="section-title">Kind Words</h2>
     <div class="section-subtitle">From past clients</div>
     <div class="divider">
@@ -2644,7 +2716,7 @@
       Fill in the brief below and I'll reply within a day or two with a quote and a sketch timeline. Nothing is locked in until you approve the quote — this just gets the conversation started.
     </p>
 
-    <form class="commission-form" id="commission-inquiry-form" novalidate>
+    <form class="commission-form" id="commission-inquiry-form" action="https://formspree.io/f/maqakjag" method="POST" novalidate>
       <div class="form-row">
         <div class="form-field">
           <label class="form-label" for="cf-name">Your Name <span class="req">·</span></label>
@@ -2657,93 +2729,105 @@
       </div>
 
       <div class="form-field">
-        <label class="form-label" for="cf-handle">Discord / Instagram <span class="optional">(optional, if you prefer DMs)</span></label>
-        <input type="text" id="cf-handle" name="handle" placeholder="@yourhandle">
-      </div>
-
-      <div class="form-field">
-        <label class="form-label">Tier <span class="req">·</span></label>
-        <div class="tier-picker" role="radiogroup" aria-label="Commission tier">
-          <label class="tier-option">
-            <input type="radio" name="tier" value="Bust — $50" required>
-            <div class="tier-card">
-              <div class="tier-name">Bust</div>
-              <div class="tier-price">$50</div>
-            </div>
-          </label>
-          <label class="tier-option">
-            <input type="radio" name="tier" value="Half-body — $100">
-            <div class="tier-card">
-              <div class="tier-name">Half-body</div>
-              <div class="tier-price">$100</div>
-            </div>
-          </label>
-          <label class="tier-option">
-            <input type="radio" name="tier" value="Full-body — $150">
-            <div class="tier-card">
-              <div class="tier-name">Full-body</div>
-              <div class="tier-price">$150</div>
-            </div>
-          </label>
-          <label class="tier-option">
-            <input type="radio" name="tier" value="Scene / Environment — $250+">
-            <div class="tier-card">
-              <div class="tier-name">Scene</div>
-              <div class="tier-price">$250+</div>
-            </div>
-          </label>
-        </div>
-        <div class="form-helper">Not sure? Pick the closest one — we can adjust on the quote.</div>
-      </div>
-
-      <div class="form-field">
-        <label class="form-label">Add-ons <span class="optional">(check any that apply)</span></label>
-        <div class="addon-grid">
-          <label class="addon-chip">
-            <input type="checkbox" name="addon" value="Additional character (+60% each)">
-            <span class="chip-body">+ Additional character</span>
-          </label>
-          <label class="addon-chip">
-            <input type="checkbox" name="addon" value="Painted background (+$60)">
-            <span class="chip-body">+ Painted background</span>
-          </label>
-          <label class="addon-chip">
-            <input type="checkbox" name="addon" value="Complex armor / wings / effects (+$30–80)">
-            <span class="chip-body">+ Complex armor / wings / effects</span>
-          </label>
-          <label class="addon-chip">
-            <input type="checkbox" name="addon" value="Commercial license (+60%)">
-            <span class="chip-body">+ Commercial license</span>
-          </label>
-        </div>
-      </div>
-
-      <div class="form-field">
         <label class="form-label" for="cf-brief">Character / Concept Brief <span class="req">·</span></label>
         <textarea id="cf-brief" name="brief" required placeholder="Who is this character? Race, class, vibe, gear, color palette, mood — anything you've got. Doesn't need to be polished."></textarea>
       </div>
 
-      <div class="form-row">
-        <div class="form-field">
-          <label class="form-label" for="cf-refs">Reference Links <span class="optional">(optional)</span></label>
-          <input type="text" id="cf-refs" name="refs" placeholder="Imgur, Pinterest, Google Drive, etc.">
-          <div class="form-helper">Or just say "I'll send images in the email reply."</div>
-        </div>
-        <div class="form-field">
-          <label class="form-label" for="cf-deadline">Deadline <span class="optional">(optional)</span></label>
-          <input type="text" id="cf-deadline" name="deadline" placeholder="e.g. flexible, by June 15, ASAP">
+      <div class="form-field">
+        <label class="form-label">Tier <span class="optional">(pick the closest — we can adjust)</span></label>
+        <div class="tier-picker" role="radiogroup" aria-label="Commission tier">
+          <label class="tier-option">
+            <input type="radio" name="tier" value="Not sure yet — let's discuss" checked>
+            <div class="tier-card">
+              <div class="tier-name">Not sure</div>
+              <div class="tier-price">Let's talk</div>
+            </div>
+          </label>
+          <label class="tier-option">
+            <input type="radio" name="tier" value="Bust — $65">
+            <div class="tier-card">
+              <div class="tier-name">Bust</div>
+              <div class="tier-price">$65</div>
+            </div>
+          </label>
+          <label class="tier-option">
+            <input type="radio" name="tier" value="Half-body — $130">
+            <div class="tier-card">
+              <div class="tier-name">Half-body</div>
+              <div class="tier-price">$130</div>
+            </div>
+          </label>
+          <label class="tier-option">
+            <input type="radio" name="tier" value="Full-body — $210">
+            <div class="tier-card">
+              <div class="tier-name">Full-body</div>
+              <div class="tier-price">$210</div>
+            </div>
+          </label>
+          <label class="tier-option">
+            <input type="radio" name="tier" value="Scene / Environment — $325+">
+            <div class="tier-card">
+              <div class="tier-name">Scene</div>
+              <div class="tier-price">$325+</div>
+            </div>
+          </label>
         </div>
       </div>
 
-      <div class="form-field">
-        <label class="form-label" for="cf-notes">Anything else? <span class="optional">(optional)</span></label>
-        <textarea id="cf-notes" name="notes" placeholder="Budget range, NSFW concerns, references to existing pieces of mine you liked, where you found me — whatever's useful."></textarea>
-      </div>
+      <!-- OPTIONAL DETAILS — collapsed by default to keep the form short.
+           These all submit normally as part of the form whether opened or not. -->
+      <details class="form-more">
+        <summary>More details <span class="optional">(optional)</span></summary>
+
+        <div class="form-field">
+          <label class="form-label" for="cf-handle">Discord / Instagram <span class="optional">(if you prefer DMs)</span></label>
+          <input type="text" id="cf-handle" name="handle" placeholder="@yourhandle">
+        </div>
+
+        <div class="form-field">
+          <label class="form-label">Add-ons <span class="optional">(check any that apply)</span></label>
+          <div class="addon-grid">
+            <label class="addon-chip">
+              <input type="checkbox" name="addon" value="Additional character (+60% each)">
+              <span class="chip-body">+ Additional character</span>
+            </label>
+            <label class="addon-chip">
+              <input type="checkbox" name="addon" value="Painted background (+$60)">
+              <span class="chip-body">+ Painted background</span>
+            </label>
+            <label class="addon-chip">
+              <input type="checkbox" name="addon" value="Complex armor / wings / effects (+$30–80)">
+              <span class="chip-body">+ Complex armor / wings / effects</span>
+            </label>
+            <label class="addon-chip">
+              <input type="checkbox" name="addon" value="Commercial license (+60%)">
+              <span class="chip-body">+ Commercial license</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label class="form-label" for="cf-refs">Reference Links</label>
+            <input type="text" id="cf-refs" name="refs" placeholder="Imgur, Pinterest, Google Drive, etc.">
+            <div class="form-helper">Or just say "I'll send images in the email reply."</div>
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="cf-deadline">Deadline</label>
+            <input type="text" id="cf-deadline" name="deadline" placeholder="e.g. flexible, by June 15, ASAP">
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="cf-notes">Anything else?</label>
+          <textarea id="cf-notes" name="notes" placeholder="Budget range, NSFW concerns, references to existing pieces of mine you liked, where you found me — whatever's useful."></textarea>
+        </div>
+      </details>
 
       <div class="form-submit-row">
         <button type="submit" class="btn">Send Inquiry →</button>
         <p class="form-fineprint">
-          On submit, your default mail app will open with everything filled in — just hit send. Prefer to skip the form? Email me directly at <a href="mailto:ptvincentptv@gmail.com" style="color:var(--twilight-bright); text-decoration:none; border-bottom:1px dotted var(--twilight-mid);">ptvincentptv@gmail.com</a>.
+          I'll reply within a day or two with a quote. Prefer email? Reach me at <a href="mailto:ptvincentptv@gmail.com" style="color:var(--twilight-bright); text-decoration:none; border-bottom:1px dotted var(--twilight-mid);">ptvincentptv@gmail.com</a>.
         </p>
         <div class="form-status" id="cf-status" aria-live="polite"></div>
       </div>
@@ -3027,15 +3111,16 @@ document.addEventListener('click', (e) => {
 });
 
 /* ============ COMMISSION FORM ============ */
-/* Builds a structured email from the form fields and opens the user's
-   default mail client. No backend required — works on GitHub Pages.
-   To swap to direct submission later (e.g. Formspree), replace the
-   mailto build with a fetch() POST to your endpoint. */
+/* Submits the form via Formspree AJAX. Keeps the user on the page,
+   shows status in #cf-status, and resets the form on success. The
+   form's action attribute (https://formspree.io/f/maqakjag) remains
+   in place as a graceful no-JS fallback. */
 (function setupCommissionForm() {
   const form = document.getElementById('commission-inquiry-form');
   if (!form) return;
   const status = document.getElementById('cf-status');
-  const RECIPIENT = 'ptvincentptv@gmail.com';
+  const submitBtn = form.querySelector('.form-submit-row .btn');
+  const ENDPOINT = 'https://formspree.io/f/maqakjag';
 
   function setStatus(msg, kind) {
     status.textContent = msg || '';
@@ -3048,82 +3133,82 @@ document.addEventListener('click', (e) => {
     return el && typeof el.value === 'string' ? el.value.trim() : '';
   }
 
-  function getCheckedAddons() {
-    return Array.from(form.querySelectorAll('input[name="addon"]:checked')).map(i => i.value);
-  }
-
-  function getSelectedTier() {
-    const t = form.querySelector('input[name="tier"]:checked');
-    return t ? t.value : '';
-  }
-
-  function buildEmailBody(data) {
-    const lines = [
-      'Hi Parker,',
-      '',
-      "I'd like to commission a piece. Here are the details:",
-      '',
-      '── Contact ──',
-      `Name: ${data.name}`,
-      `Email: ${data.email}`,
-    ];
-    if (data.handle) lines.push(`Discord/Instagram: ${data.handle}`);
-    lines.push('', '── Commission ──', `Tier: ${data.tier}`);
-    if (data.addons.length) {
-      lines.push('Add-ons:');
-      data.addons.forEach(a => lines.push(`  • ${a}`));
-    } else {
-      lines.push('Add-ons: none');
-    }
-    lines.push('', '── Brief ──', data.brief);
-    if (data.refs)     lines.push('', '── References ──', data.refs);
-    if (data.deadline) lines.push('', '── Deadline ──', data.deadline);
-    if (data.notes)    lines.push('', '── Notes ──', data.notes);
-    lines.push('', 'Thanks!', data.name);
-    return lines.join('\n');
-  }
-
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     setStatus('');
 
-    const data = {
-      name:     getField('name'),
-      email:    getField('email'),
-      handle:   getField('handle'),
-      tier:     getSelectedTier(),
-      addons:   getCheckedAddons(),
-      brief:    getField('brief'),
-      refs:     getField('refs'),
-      deadline: getField('deadline'),
-      notes:    getField('notes'),
-    };
+    const name = getField('name');
+    const email = getField('email');
+    const brief = getField('brief');
 
-    // Validate required fields
+    // Required-field validation (only the three visible required fields)
     const missing = [];
-    if (!data.name)  missing.push('your name');
-    if (!data.email) missing.push('your email');
-    if (!data.tier)  missing.push('a tier');
-    if (!data.brief) missing.push('the character brief');
+    if (!name)  missing.push('your name');
+    if (!email) missing.push('your email');
+    if (!brief) missing.push('the character brief');
     if (missing.length) {
       setStatus('Please fill in: ' + missing.join(', ') + '.', 'error');
       return;
     }
-    // Light email sanity check
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       setStatus('That email address looks off — could you double-check it?', 'error');
       return;
     }
 
-    const subject = `Commission Inquiry — ${data.tier.split(' — ')[0]} — ${data.name}`;
-    const body = buildEmailBody(data);
-    const url = 'mailto:' + RECIPIENT
-      + '?subject=' + encodeURIComponent(subject)
-      + '&body=' + encodeURIComponent(body);
+    // Build the payload from the live form. FormData captures multiple
+    // checkbox values for "addon" automatically when we read them as a list.
+    const fd = new FormData(form);
+    const payload = {};
+    for (const [key, value] of fd.entries()) {
+      if (key === 'addon') {
+        if (!payload.addons) payload.addons = [];
+        payload.addons.push(value);
+      } else {
+        payload[key] = value;
+      }
+    }
+    // Friendly subject line that lands well in Parker's inbox
+    const tierShort = (payload.tier || '').split(' — ')[0] || 'Inquiry';
+    payload._subject = `Commission Inquiry — ${tierShort} — ${name}`;
 
-    setStatus('Opening your mail app — just hit send to deliver it.', 'success');
-    // Use location.href so this counts as a user-initiated navigation
-    window.location.href = url;
+    // Optimistic UI
+    submitBtn.disabled = true;
+    const originalLabel = submitBtn.textContent;
+    submitBtn.textContent = 'Sending…';
+    setStatus('Sending your inquiry…');
+
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (res.ok) {
+        setStatus("Sent! I'll reply within a day or two with a quote.", 'success');
+        form.reset();
+        // Restore the "Not sure yet" default after reset
+        const fallback = form.querySelector('input[name="tier"][value^="Not sure"]');
+        if (fallback) fallback.checked = true;
+      } else {
+        let msg = "Something went wrong sending that. Please try again, or email me directly at ptvincentptv@gmail.com.";
+        try {
+          const data = await res.json();
+          if (data && Array.isArray(data.errors) && data.errors.length) {
+            msg = data.errors.map(err => err.message).join(' ');
+          }
+        } catch { /* fall through to default message */ }
+        setStatus(msg, 'error');
+      }
+    } catch {
+      setStatus("Couldn't reach the server. Check your connection and try again, or email me at ptvincentptv@gmail.com.", 'error');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalLabel;
+    }
   });
 })();
 
@@ -3156,6 +3241,11 @@ function renderStoryHTML(entry) {
     <h2>${entry.title || ''}</h2>
     <div class="byline">${entry.byline || ''}</div>
     <div class="story-body">${paragraphs}</div>
+    <div class="story-cta">
+      <div class="story-cta-divider" aria-hidden="true">✦</div>
+      <p class="story-cta-text">Want art for your own world?</p>
+      <a class="btn ghost story-cta-btn" data-scroll="commission-form">Commission a piece →</a>
+    </div>
   `;
 }
 
