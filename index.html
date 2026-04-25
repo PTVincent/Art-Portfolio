@@ -504,11 +504,25 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
   }
   .about-portrait .silhouette svg {
     width: 70%;
     height: auto;
     opacity: 0.85;
+  }
+  .about-portrait .portrait-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    filter: saturate(0.92) contrast(1.02);
+    transition: transform 0.8s ease, filter 0.8s ease;
+  }
+  .about-portrait:hover .portrait-img {
+    transform: scale(1.03);
+    filter: saturate(1) contrast(1.05);
   }
   .about-portrait .sigil-text {
     position: absolute;
@@ -1613,26 +1627,11 @@
         <svg class="frame-corner tr" viewBox="0 0 40 40"><path d="M0 0 H40 V8 H8 V40 H0 Z" opacity="0.9"/></svg>
         <svg class="frame-corner bl" viewBox="0 0 40 40"><path d="M0 0 H40 V8 H8 V40 H0 Z" opacity="0.9"/></svg>
         <svg class="frame-corner br" viewBox="0 0 40 40"><path d="M0 0 H40 V8 H8 V40 H0 Z" opacity="0.9"/></svg>
-        <!-- silhouette placeholder (swap with real portrait) -->
+        <!-- portrait of the artist -->
         <div class="silhouette">
-          <svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="silG" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#9ec3d6" stop-opacity="0.4"/>
-                <stop offset="100%" stop-color="#2e2214" stop-opacity="1"/>
-              </linearGradient>
-              <radialGradient id="halo" cx="0.5" cy="0.3" r="0.5">
-                <stop offset="0%" stop-color="#c9a24a" stop-opacity="0.3"/>
-                <stop offset="100%" stop-color="#c9a24a" stop-opacity="0"/>
-              </radialGradient>
-            </defs>
-            <circle cx="100" cy="70" r="80" fill="url(#halo)"/>
-            <!-- hooded figure silhouette -->
-            <path d="M100 30 Q60 30 55 80 Q50 120 70 140 L70 240 L130 240 L130 140 Q150 120 145 80 Q140 30 100 30 Z" fill="url(#silG)"/>
-            <path d="M75 85 Q100 70 125 85" stroke="#c9a24a" stroke-width="0.6" fill="none" opacity="0.4"/>
-          </svg>
+          <img src="art/_portrait.png" alt="Parker Vincent" class="portrait-img" onerror="this.onerror=null;this.src='art/_portrait.jpg';">
         </div>
-        <div class="sigil-text">✦ Anno MMXXVI ✦</div>
+        <div class="sigil-text">✦ Parker Vincent ✦</div>
       </div>
 
       <div class="about-text">
@@ -2188,7 +2187,7 @@ async function fetchGitHubArtList(repo) {
   if (!Array.isArray(data)) throw new Error('unexpected GitHub API shape');
   const imgExt = /\.(jpe?g|png|webp|gif|avif)$/i;
   return data
-    .filter(item => item.type === 'file' && imgExt.test(item.name))
+    .filter(item => item.type === 'file' && imgExt.test(item.name) && !item.name.startsWith('_'))
     .map(item => item.path)
     .sort();
 }
