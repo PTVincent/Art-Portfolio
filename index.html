@@ -1632,6 +1632,383 @@
     .gallery-grid { column-count: 1; }
     .lightbox-close { top: 1rem; right: 1rem; }
   }
+  /* ============ PRICING TIERS ============ */
+  .pricing {
+    padding: 6rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  .pricing-card {
+    background: linear-gradient(180deg, rgba(36, 26, 16, 0.6) 0%, rgba(17, 13, 10, 0.4) 100%);
+    border: 1px solid rgba(201, 162, 74, 0.2);
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+    transition: all 0.5s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  .pricing-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--gold);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 40px rgba(201, 162, 74, 0.1);
+  }
+  .pricing-card.featured {
+    border-color: var(--gold);
+    background: linear-gradient(180deg, rgba(50, 36, 18, 0.7) 0%, rgba(20, 14, 10, 0.55) 100%);
+    box-shadow: 0 0 40px rgba(201, 162, 74, 0.15);
+  }
+  .pricing-card .pop-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gold);
+    color: var(--ink);
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    font-weight: 700;
+    box-shadow: 0 0 16px rgba(231, 200, 117, 0.4);
+  }
+  .pricing-card h4 {
+    font-family: 'Cinzel Decorative', serif;
+    color: var(--gold);
+    font-size: 1.2rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+    text-align: center;
+  }
+  .pricing-card .price {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 2.6rem;
+    color: var(--gold-bright);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 0.4rem;
+    text-shadow: 0 0 18px rgba(231, 200, 117, 0.25);
+  }
+  .pricing-card .price .currency {
+    font-size: 1.4rem;
+    vertical-align: top;
+    margin-right: 2px;
+    color: var(--gold);
+  }
+  .pricing-card .price-note {
+    text-align: center;
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    color: var(--twilight-glow);
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 1.6rem;
+    opacity: 0.8;
+  }
+  .pricing-card .tier-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201, 162, 74, 0.4), transparent);
+    margin: 0 auto 1.4rem;
+    width: 80%;
+  }
+  .pricing-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+    flex-grow: 1;
+  }
+  .pricing-card ul li {
+    color: var(--parchment);
+    font-size: 1rem;
+    line-height: 1.55;
+    padding: 0.4rem 0 0.4rem 1.5rem;
+    position: relative;
+  }
+  .pricing-card ul li::before {
+    content: '✦';
+    position: absolute;
+    left: 0;
+    color: var(--gold-dim);
+    font-size: 0.8rem;
+    top: 0.55rem;
+  }
+
+  .pricing-aux {
+    margin-top: 3rem;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--parchment);
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+  .pricing-aux strong {
+    color: var(--gold);
+    font-weight: 600;
+  }
+  .addons-strip {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+    margin: 1.6rem auto 0;
+    max-width: 900px;
+  }
+  .addon-pill {
+    border: 1px solid rgba(201, 162, 74, 0.3);
+    padding: 0.4rem 0.95rem;
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    color: var(--parchment);
+    font-size: 0.88rem;
+    letter-spacing: 0.04em;
+    background: rgba(201, 162, 74, 0.04);
+  }
+  .addon-pill .plus {
+    color: var(--gold-bright);
+    font-weight: 600;
+    font-style: normal;
+    margin-right: 0.35rem;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  /* ============ FAQ ============ */
+  .faq {
+    padding: 6rem 2rem;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+  .faq-list {
+    margin-top: 3rem;
+    border-top: 1px solid rgba(201, 162, 74, 0.15);
+  }
+  .faq-item {
+    border-bottom: 1px solid rgba(201, 162, 74, 0.15);
+    padding: 1.6rem 0;
+  }
+  .faq-item h4 {
+    font-family: 'Cinzel Decorative', serif;
+    color: var(--gold);
+    font-size: 1.05rem;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.7rem;
+    line-height: 1.4;
+  }
+  .faq-item p {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--parchment);
+    font-size: 1.05rem;
+    line-height: 1.75;
+  }
+  .faq-item p + p { margin-top: 0.6rem; }
+
+  /* ============ TWITCH LIVE LINK ============ */
+  .twitch-live {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1.4rem;
+    padding: 0.55rem 1.1rem;
+    border: 1px solid rgba(127, 196, 230, 0.35);
+    background: rgba(46, 74, 95, 0.18);
+    color: var(--twilight-bright);
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: all 0.4s ease;
+  }
+  .twitch-live:hover {
+    border-color: var(--twilight-bright);
+    background: rgba(46, 74, 95, 0.35);
+    box-shadow: 0 0 18px rgba(127, 196, 230, 0.25);
+    color: #fff;
+  }
+  .twitch-live .live-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #b85c5c;
+    box-shadow: 0 0 8px rgba(184, 92, 92, 0.7);
+    animation: livePulse 1.6s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+  @keyframes livePulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.55; transform: scale(0.85); }
+  }
+  .twitch-live .schedule {
+    font-style: normal;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+
+  /* ============ INTAKE FORM ============ */
+  .intake-form {
+    margin: 2.5rem auto 0;
+    max-width: 720px;
+    text-align: left;
+    display: grid;
+    gap: 1.4rem;
+  }
+  .intake-form .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.4rem;
+  }
+  .intake-form label {
+    display: block;
+    font-family: 'Cinzel Decorative', serif;
+    color: var(--gold);
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 0.55rem;
+  }
+  .intake-form .req {
+    color: var(--twilight-bright);
+    font-weight: 700;
+  }
+  .intake-form input[type="text"],
+  .intake-form input[type="email"],
+  .intake-form input[type="url"],
+  .intake-form textarea {
+    width: 100%;
+    background: rgba(7, 6, 10, 0.7);
+    border: 1px solid rgba(201, 162, 74, 0.3);
+    padding: 0.85rem 1rem;
+    color: var(--parchment);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .intake-form textarea {
+    min-height: 130px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+  .intake-form input:focus,
+  .intake-form textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 1px var(--gold), 0 0 18px rgba(201, 162, 74, 0.15);
+  }
+  .intake-form input::placeholder,
+  .intake-form textarea::placeholder {
+    color: rgba(217, 199, 160, 0.4);
+    font-style: italic;
+  }
+  .intake-form .options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .intake-form .options label {
+    margin: 0;
+    cursor: pointer;
+    border: 1px solid rgba(201, 162, 74, 0.3);
+    padding: 0.55rem 0.95rem;
+    background: rgba(7, 6, 10, 0.5);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    color: var(--parchment);
+    text-transform: none;
+    transition: all 0.3s ease;
+  }
+  .intake-form .options label:hover {
+    border-color: var(--gold);
+    color: var(--gold-bright);
+  }
+  .intake-form .options input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .intake-form .options input[type="radio"]:checked + span {
+    color: var(--ink);
+  }
+  .intake-form .options label:has(input:checked) {
+    background: var(--gold-bright);
+    border-color: var(--gold-bright);
+    color: var(--ink);
+    box-shadow: 0 0 14px rgba(231, 200, 117, 0.3);
+  }
+  .intake-form .check-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--parchment);
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  .intake-form .check-row input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--gold);
+    cursor: pointer;
+  }
+  .intake-form .check-row label {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--parchment);
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 1rem;
+    margin: 0;
+    cursor: pointer;
+  }
+  .intake-form .submit-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+    margin-top: 0.6rem;
+  }
+  .intake-form button[type="submit"] {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 1.1rem 2.6rem;
+    color: var(--ink);
+    background: var(--gold-bright);
+    border: 1px solid var(--gold-bright);
+    cursor: pointer;
+    transition: all 0.4s ease;
+  }
+  .intake-form button[type="submit"]:hover {
+    background: var(--gold);
+    box-shadow: 0 0 28px rgba(231, 200, 117, 0.5);
+    transform: translateY(-2px);
+  }
+  .intake-form .form-note {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    color: var(--parchment);
+    opacity: 0.75;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  @media (max-width: 880px) {
+    .pricing-grid { grid-template-columns: 1fr; }
+    .pricing-card.featured { order: -1; }
+    .intake-form .row { grid-template-columns: 1fr; }
+  }
+
 </style>
 </head>
 <body>
@@ -1769,7 +2146,14 @@
 
   <!-- NO-AI LINE -->
   <div class="no-ai reveal">
-    Every illustration is hand-painted by me. No generative AI is used at any stage. Process timelapses available on request.
+    Every illustration is hand-painted by me. No generative AI is used at any stage. Process timelapses and layered files are available on request.
+    <div style="margin-top: 0.4rem;">
+      <a class="twitch-live" href="https://twitch.tv/ptvincent_" target="_blank" rel="noopener">
+        <span class="live-dot" aria-hidden="true"></span>
+        Watch me paint live on Twitch
+        <span class="schedule">Mon · Wed · Fri · Sun</span>
+      </a>
+    </div>
   </div>
 
   <!-- FEATURED TEASER -->
@@ -1796,9 +2180,12 @@
   </section>
 
   <!-- CRAFT / COMMISSIONS -->
-  <section class="craft reveal">
+  <!-- COMMISSIONS / PRICING -->
+  <!-- Pricing per the 2026 report: Bust $85 / Half-body $165 (most popular) / Full-body $275.
+       Scenes & complex work anchored at $400+ as request-quote. Add-ons strip below. -->
+  <section class="pricing reveal" id="commissions">
     <h2 class="section-title">Commissions</h2>
-    <div class="section-subtitle">What I Offer</div>
+    <div class="section-subtitle">Pricing &amp; Tiers</div>
     <div class="divider">
       <svg viewBox="0 0 240 20" xmlns="http://www.w3.org/2000/svg">
         <line x1="0" y1="10" x2="100" y2="10" stroke="#c9a24a" stroke-width="0.8" opacity="0.6"/>
@@ -1809,26 +2196,64 @@
       </svg>
     </div>
 
-    <div class="craft-grid">
-      <div class="craft-card reveal reveal-delay-1">
-        <div class="numeral">I</div>
-        <h4>Character Portraits</h4>
-        <p>Busts, half-bodies, and full illustrations of your heroes, villains, and everyone in between. Painted from your brief with care, whether they're a bright-eyed adventurer or something stalking the edge of camp.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card reveal reveal-delay-1">
+        <h4>Bust</h4>
+        <div class="price"><span class="currency">$</span>85</div>
+        <div class="price-note">Head &amp; Shoulders</div>
+        <div class="tier-divider"></div>
+        <ul>
+          <li>Detailed character bust with painted background wash</li>
+          <li>Strong likeness, full color rendering</li>
+          <li>One free revision at sketch stage</li>
+          <li>High-res PNG delivered</li>
+          <li>Perfect for tokens, profiles, and reference</li>
+        </ul>
       </div>
-      <div class="craft-card reveal reveal-delay-2">
-        <div class="numeral">II</div>
-        <h4>Environments & Worlds</h4>
-        <p>Landscapes, cities, ruins, and key art for your homebrew setting or original IP. If you're building a world and need it shown, this is where we collaborate. Wide vistas, tucked-away corners, anything in between.</p>
+
+      <div class="pricing-card featured reveal reveal-delay-2">
+        <div class="pop-badge">Most Popular</div>
+        <h4>Half-body</h4>
+        <div class="price"><span class="currency">$</span>165</div>
+        <div class="price-note">Waist Up · Full Detail</div>
+        <div class="tier-divider"></div>
+        <ul>
+          <li>Waist-up portrait with full armor, weapons, and props</li>
+          <li>Atmospheric background and lighting</li>
+          <li>One free revision at sketch stage</li>
+          <li>High-res PNG + layered file on request</li>
+          <li>The sweet spot for hero characters</li>
+        </ul>
       </div>
-      <div class="craft-card reveal reveal-delay-3">
-        <div class="numeral">III</div>
-        <h4>Creature Design</h4>
-        <p>Companions, beasts, monsters, and the things at the end of the dungeon. Full design sheets available with anatomy, silhouette, and color logic. From friendly familiars to homebrew BBEGs, all welcome.</p>
+
+      <div class="pricing-card reveal reveal-delay-3">
+        <h4>Full-body</h4>
+        <div class="price"><span class="currency">$</span>275</div>
+        <div class="price-note">Head to Toe · Hero Pose</div>
+        <div class="tier-divider"></div>
+        <ul>
+          <li>Full character with environment-grade detail</li>
+          <li>Complete pose, gear, and rendered backdrop</li>
+          <li>One free revision at sketch stage</li>
+          <li>High-res PNG + layered file on request</li>
+          <li>Ideal for key art and centerpiece pieces</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pricing-aux">
+      <p><strong>Scenes, party illustrations, environments &amp; creature design</strong> — from <strong>$400</strong>. These are scoped per project; reach out with what you have in mind and I'll send a quote.</p>
+
+      <div class="addons-strip" aria-label="Common add-ons">
+        <span class="addon-pill"><span class="plus">+</span>60% per additional character</span>
+        <span class="addon-pill"><span class="plus">+</span>$60 painted background</span>
+        <span class="addon-pill"><span class="plus">+</span>$30–$80 complex armor / wings / effects</span>
+        <span class="addon-pill"><span class="plus">+</span>60% commercial license</span>
       </div>
     </div>
 
     <div style="text-align:center; margin-top:3.5rem;">
-      <a class="btn" href="mailto:ptvincentptv@gmail.com?subject=Commission%20Inquiry">Commission your character →</a>
+      <a class="btn" href="#commission-form">Commission your character →</a>
     </div>
   </section>
 
@@ -1865,8 +2290,60 @@
     </div>
   </section>
 
-  <!-- TESTIMONIALS (hidden until populated) -->
-  <section class="testimonials reveal" id="testimonials-section" style="display:none;">
+  <!-- FAQ -->
+  <!-- Defaults reflect the 2026 commission-vetting playbook (PayPal G&S, 50% deposit,
+       sketch-stage revisions, layered files). Sanity-check each line against your actual
+       practice and adjust prices, timeframes, or revision counts as needed. -->
+  <section class="faq reveal">
+    <h2 class="section-title">Questions Worth Asking</h2>
+    <div class="section-subtitle">Common Questions</div>
+    <div class="divider">
+      <svg viewBox="0 0 240 20" xmlns="http://www.w3.org/2000/svg">
+        <line x1="0" y1="10" x2="100" y2="10" stroke="#c9a24a" stroke-width="0.8" opacity="0.6"/>
+        <line x1="140" y1="10" x2="240" y2="10" stroke="#c9a24a" stroke-width="0.8" opacity="0.6"/>
+        <path d="M100 10 L115 4 L120 10 L115 16 Z" fill="#c9a24a"/>
+        <path d="M140 10 L125 4 L120 10 L125 16 Z" fill="#c9a24a"/>
+        <circle cx="120" cy="10" r="2.5" fill="#e7c875"/>
+      </svg>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <h4>How long does a commission take?</h4>
+        <p>Typically one to two weeks per piece from the moment your sketch is approved. Larger scenes and full environments run longer, and I'll always quote a realistic delivery window before we start. If you need something faster, ask and I'll let you know honestly whether I can hit your deadline.</p>
+      </div>
+
+      <div class="faq-item">
+        <h4>How do payments work?</h4>
+        <p>50% deposit at sketch approval, balance due on final delivery. All payments go through <strong>PayPal Goods &amp; Services</strong>, which means you're covered by PayPal's buyer protection. I don't take Friends &amp; Family payments as that protects both of us.</p>
+      </div>
+
+      <div class="faq-item">
+        <h4>What about revisions?</h4>
+        <p>Two free revisions are included at the sketch stage because that's where the heaviest changes happen and where they cost least to make. Additional revisions at the sketch stage are $20 each. Once we've moved into color, the composition is locked, and only minor tweaks are possible without rescoping.</p>
+      </div>
+
+      <div class="faq-item">
+        <h4>What do I actually get when it's finished?</h4>
+        <p>A high-resolution PNG at 4K or larger, suitable for printing. Layered files (PSD or Procreate) are available on request at no extra charge. A timelapse video can be requested.</p>
+      </div>
+
+      <div class="faq-item">
+        <h4>Can I use the artwork commercially?</h4>
+        <p>The base price covers personal use with VTT tokens, character sheets, your own campaign, social posts, that kind of thing. For commercial use (selling prints, publishing in a paid product, Kickstarter rewards, anything where the art generates revenue), add 60% to the base price. We'll write the scope into the agreement so you know exactly what's licensed.</p>
+      </div>
+
+      <div class="faq-item">
+        <h4>Do you actually not use AI?</h4>
+        <p>Correct. Every piece is painted by hand in Clip Studio Paint, from blank canvas to final render. I'm happy to send a process timelapse, share layered files, or stream the process on twitch if you'd like to watch it be made in real time.</p>
+      </div>
+
+      <div class="faq-item">
+        <h4>Is there anything you won't paint?</h4>
+        <p>I don't take NSFW or hateful works. Beyond that, dark fantasy, horror, body horror, and morally complex characters are all on the table. If you're unsure, just ask.</p>
+      </div>
+    </div>
+  </section>
     <h2 class="section-title">Kind Words</h2>
     <div class="section-subtitle">From past clients</div>
     <div class="divider">
