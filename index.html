@@ -284,6 +284,147 @@
     left: 0;
   }
 
+  /* ============ STICKY MOBILE CTA ============ */
+  /* Visible only on mobile + home page + when form is out of view.
+     Persistent one-tap path to the commission form. */
+  .sticky-cta {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 45;
+    padding: 0.85rem 1.4rem;
+    background: linear-gradient(180deg, rgba(46, 74, 95, 0.95), rgba(21, 34, 48, 0.95));
+    color: var(--gold-bright);
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--gold);
+    border-radius: 2px;
+    box-shadow:
+      0 8px 24px rgba(0, 0, 0, 0.5),
+      0 0 16px rgba(201, 162, 74, 0.2);
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .sticky-cta.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  /* Hide entirely above 720px — desktop has the nav for this */
+  @media (min-width: 721px) {
+    .sticky-cta { display: none !important; }
+  }
+
+  /* ============ MOBILE NAV (HAMBURGER + OVERLAY) ============ */
+  .nav-toggle {
+    display: none; /* shown via @media below 720px */
+    width: 44px;
+    height: 44px;
+    background: none;
+    border: 1px solid rgba(201, 162, 74, 0.3);
+    cursor: pointer;
+    padding: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    border-radius: 2px;
+    transition: border-color 0.25s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .nav-toggle:hover { border-color: var(--gold); }
+  .nav-toggle-bar {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--gold);
+    transition: transform 0.3s ease, opacity 0.2s ease;
+  }
+  .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+  }
+  .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2) { opacity: 0; }
+  .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
+
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background: linear-gradient(180deg, rgba(7, 6, 10, 0.98), rgba(17, 13, 10, 0.98));
+    backdrop-filter: blur(14px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.4rem;
+    padding: 4rem 2rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .mobile-menu.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .mobile-menu-close {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    width: 44px;
+    height: 44px;
+    background: none;
+    border: none;
+    color: var(--gold);
+    font-size: 2.2rem;
+    line-height: 1;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .mobile-menu-list {
+    list-style: none;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 0;
+  }
+  .mobile-menu-list a {
+    display: block;
+    padding: 1rem 2rem;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--parchment);
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.25s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .mobile-menu-list a:hover,
+  .mobile-menu-list a:focus { color: var(--gold-bright); }
+  .mobile-menu-cta {
+    margin-top: 1.4rem;
+  }
+
+  @media (max-width: 720px) {
+    nav.main { padding: 1rem 1.4rem; }
+    nav.main .crest svg { width: 32px; height: 32px; }
+    nav.main .crest span { font-size: 0.78rem; letter-spacing: 0.16em; }
+    nav.main ul { display: none; }
+    .nav-toggle { display: flex; }
+  }
+
   /* ============ PAGE SHELL ============ */
   .page {
     display: none;
@@ -2121,23 +2262,58 @@
   }
   .faq-item {
     border-bottom: 1px solid rgba(201, 162, 74, 0.15);
-    padding: 1.6rem 0;
+    /* native &lt;details&gt; — no JS needed for the accordion behavior */
   }
-  .faq-item h4 {
+  .faq-item > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 1.4rem 2.2rem 1.4rem 0;
+    position: relative;
     font-family: 'Cinzel Decorative', serif;
     color: var(--gold);
-    font-size: 1.05rem;
+    font-size: 1.02rem;
     letter-spacing: 0.06em;
-    margin-bottom: 0.7rem;
     line-height: 1.4;
+    transition: color 0.25s ease;
+    -webkit-tap-highlight-color: transparent;
   }
-  .faq-item p {
+  .faq-item > summary::-webkit-details-marker { display: none; }
+  .faq-item > summary::after {
+    content: '';
+    position: absolute;
+    right: 0.4rem;
+    top: 50%;
+    width: 10px;
+    height: 10px;
+    border-right: 1.5px solid var(--gold);
+    border-bottom: 1.5px solid var(--gold);
+    transform: translateY(-70%) rotate(45deg);
+    transition: transform 0.25s ease, border-color 0.25s ease;
+  }
+  .faq-item[open] > summary::after {
+    transform: translateY(-30%) rotate(-135deg);
+  }
+  .faq-item > summary:hover,
+  .faq-item[open] > summary {
+    color: var(--gold-bright);
+  }
+  .faq-item > summary:hover::after,
+  .faq-item[open] > summary::after {
+    border-color: var(--gold-bright);
+  }
+  .faq-item > p {
     font-family: 'Cormorant Garamond', serif;
     color: var(--parchment);
     font-size: 1.05rem;
     line-height: 1.75;
+    padding: 0 0 1.6rem 0;
+    animation: faqOpen 0.35s ease-out;
   }
-  .faq-item p + p { margin-top: 0.6rem; }
+  .faq-item > p + p { margin-top: 0.6rem; }
+  @keyframes faqOpen {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
 
   /* ============ TWITCH LIVE LINK ============ */
   .twitch-live {
@@ -2338,6 +2514,72 @@
     .intake-form .row { grid-template-columns: 1fr; }
   }
 
+  /* ============ CONSOLIDATED MOBILE TIGHTENING ============ */
+  /* Final pass: shrink padding, scale type, ensure tap targets are big enough,
+     and trim ornamental whitespace that eats the screen on phones. */
+  @media (max-width: 720px) {
+    /* Page shell */
+    .page { padding-top: 5rem; }
+
+    /* Hero — less vertical air, smaller scroll cue */
+    .hero { padding: 2rem 1.2rem; min-height: calc(100vh - 5rem); }
+    .hero .subtitle { font-size: 1.05rem; }
+    .hero .cta-row { flex-direction: column; gap: 0.7rem; width: 100%; max-width: 320px; }
+    .hero .cta-row .btn { width: 100%; text-align: center; }
+    .scroll-cue { display: none; }
+
+    /* Section padding — was 6rem, now 3.5rem */
+    .featured, .pricing, .process, .faq, .testimonials,
+    .commission-form-section, .about, .final-cta { padding: 3.5rem 1.2rem; }
+
+    /* About — stack the portrait above the text on mobile */
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .about-portrait { max-width: 260px; margin: 0 auto; }
+
+    /* FAQ — bigger tap targets and tighter padding */
+    .faq-item > summary { padding: 1.2rem 2rem 1.2rem 0; font-size: 0.95rem; }
+    .faq-item > p { font-size: 1rem; line-height: 1.7; padding-bottom: 1.4rem; }
+
+    /* Form — smaller padding so fields fill more of the screen */
+    .commission-form { padding: 2rem 1rem; }
+    .tier-picker { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+    .addon-grid { grid-template-columns: 1fr 1fr; }
+
+    /* Process steps — single column with tighter padding */
+    .process-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+
+    /* Testimonials — single column */
+    .testimonials-grid { grid-template-columns: 1fr; }
+
+    /* Featured grid — single column instead of 3 squeezed */
+    .featured-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+
+    /* No-AI / Twitch line — fits better tighter */
+    .no-ai { padding: 1.6rem 1.2rem; font-size: 0.95rem; }
+    .twitch-live { font-size: 0.88rem; padding: 0.5rem 0.9rem; }
+
+    /* Slot status — already responsive via earlier rule, just ensure top margin */
+    .slot-status { margin: 0.6rem auto 0; }
+
+    /* Final CTA */
+    .final-cta-inner { padding: 2.5rem 1.4rem; }
+
+    /* Section titles — smaller, less letter-spacing burn */
+    .section-title { font-size: 2rem; }
+    .section-subtitle { font-size: 0.78rem; letter-spacing: 0.3em; }
+
+    /* Bigger tap targets across the board */
+    .btn { padding: 0.95rem 1.6rem; }
+  }
+
+  /* Reduce motion preference — kill animations for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .grain { animation: none; }
+    .ember { display: none; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .faq-item > p { animation: none; }
+  }
+
 </style>
 </head>
 <body>
@@ -2372,7 +2614,29 @@
     <li><a data-route="tome">Journal</a></li>
     <li><a data-route="contact">Contact</a></li>
   </ul>
+  <!-- HAMBURGER (mobile only — toggled in via media query) -->
+  <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+    <span class="nav-toggle-bar"></span>
+    <span class="nav-toggle-bar"></span>
+    <span class="nav-toggle-bar"></span>
+  </button>
 </nav>
+
+<!-- MOBILE OVERLAY MENU — full-screen, closed by default. Items use the same
+     data-route / data-scroll attributes as the desktop nav so the existing
+     router handles them without any change. JS just closes the menu after
+     a tap so the page transition is visible. -->
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">×</button>
+  <ul class="mobile-menu-list">
+    <li><a data-route="home">Home</a></li>
+    <li><a data-scroll="commissions">Commissions</a></li>
+    <li><a data-route="gallery">Gallery</a></li>
+    <li><a data-route="tome">Journal</a></li>
+    <li><a data-route="contact">Contact</a></li>
+  </ul>
+  <a class="btn mobile-menu-cta" data-scroll="commission-form">Commission your character →</a>
+</div>
 
 <!-- ==================== HOME PAGE ==================== -->
 <div class="page active" id="page-home">
@@ -2450,67 +2714,6 @@
     </div>
   </section>
 
-  <!-- ABOUT -->
-  <section class="about reveal">
-    <h2 class="section-title">About</h2>
-    <div class="section-subtitle">The Artist Behind the Ink</div>
-
-    <div class="divider">
-      <svg viewBox="0 0 240 20" xmlns="http://www.w3.org/2000/svg">
-        <line x1="0" y1="10" x2="100" y2="10" stroke="#c9a24a" stroke-width="0.8" opacity="0.6"/>
-        <line x1="140" y1="10" x2="240" y2="10" stroke="#c9a24a" stroke-width="0.8" opacity="0.6"/>
-        <path d="M100 10 L115 4 L120 10 L115 16 Z" fill="#c9a24a"/>
-        <path d="M140 10 L125 4 L120 10 L125 16 Z" fill="#c9a24a"/>
-        <circle cx="120" cy="10" r="2.5" fill="#e7c875"/>
-      </svg>
-    </div>
-
-    <div class="about-grid">
-      <div class="about-portrait">
-        <!-- corner ornaments -->
-        <svg class="frame-corner tl" viewBox="0 0 40 40"><path d="M0 0 H40 V8 H8 V40 H0 Z" opacity="0.9"/><path d="M12 12 L32 12 M12 12 L12 32" stroke="#c9a24a" stroke-width="0.5" fill="none" opacity="0.6"/></svg>
-        <svg class="frame-corner tr" viewBox="0 0 40 40"><path d="M0 0 H40 V8 H8 V40 H0 Z" opacity="0.9"/></svg>
-        <svg class="frame-corner bl" viewBox="0 0 40 40"><path d="M0 0 H40 V8 H8 V40 H0 Z" opacity="0.9"/></svg>
-        <svg class="frame-corner br" viewBox="0 0 40 40"><path d="M0 0 H40 V8 H8 V40 H0 Z" opacity="0.9"/></svg>
-        <!-- portrait of the artist -->
-        <div class="silhouette">
-          <img src="art/_portrait.png" alt="Parker Vincent" class="portrait-img" onerror="this.onerror=null;this.src='art/_portrait.jpg';">
-        </div>
-        <div class="sigil-text">✦ Parker Vincent ✦</div>
-      </div>
-
-      <div class="about-text">
-        <h3>Hello,</h3>
-        <p class="drop-cap">
-          I'm Parker, a digital illustrator based on the Virginia coast. I mostly paint fantasy which includes anything from knights and strange forest creatures to cities, coastlines, or darker characters when the idea calls for it. If that's the kind of world you're into, you'll probably feel at home here.
-        </p>
-        <p>
-          A lot of my work is for tabletop players, dungeon masters, streamers, and people building their own worlds. Maybe it's a party portrait, a setting you've had in your head for a while, or a villain your group keeps running into. Even if all you have is a rough idea, that's enough to start.
-        </p>
-        <p>
-          Everything is painted from your brief. I'll send you a sketch first so we can make sure it's right before moving on to color.
-        </p>
-        <p>
-          If something here stands out, feel free to reach out or email me because I'd like to hear what you're working on.
-        </p>
-        <div class="meta">Character Design · Environments · Creature Illustration</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- NO-AI LINE -->
-  <div class="no-ai reveal">
-    Every illustration is hand-painted by me. No generative AI is used at any stage. Process timelapses and layered files are available on request.
-    <div style="margin-top: 0.4rem;">
-      <a class="twitch-live" href="https://twitch.tv/ptvincent_" target="_blank" rel="noopener">
-        <span class="live-dot" aria-hidden="true"></span>
-        Watch me paint live on Twitch
-        <span class="schedule"></span>
-      </a>
-    </div>
-  </div>
-
-  <!-- CRAFT / COMMISSIONS -->
   <!-- COMMISSIONS / PRICING -->
   <!-- Pricing: Bust $65 / Half-body $130 (most popular) / Full-body $210.
        Scenes & complex work from $325 as request-quote. Add-ons strip below. -->
@@ -2639,42 +2842,55 @@
     </div>
 
     <div class="faq-list">
-      <div class="faq-item">
-        <h4>How long does a commission take?</h4>
+      <details class="faq-item" open>
+        <summary class="faq-q">How long does a commission take?</summary>
         <p>Typically one to two weeks per piece from the moment your sketch is approved. Larger scenes and full environments run longer, and I'll always quote a realistic delivery window before we start. If you need something faster, ask and I'll let you know honestly whether I can hit your deadline.</p>
-      </div>
+      </details>
 
-      <div class="faq-item">
-        <h4>How do payments work?</h4>
+      <details class="faq-item">
+        <summary class="faq-q">How do payments work?</summary>
         <p>50% deposit at sketch approval, balance due on final delivery. All payments go through <strong>PayPal Goods &amp; Services</strong>, which means you're covered by PayPal's buyer protection. I don't take Friends &amp; Family payments as that protects both of us.</p>
-      </div>
+      </details>
 
-      <div class="faq-item">
-        <h4>What about revisions?</h4>
+      <details class="faq-item">
+        <summary class="faq-q">What about revisions?</summary>
         <p>Two free revisions are included at the sketch stage because that's where the heaviest changes happen and where they cost least to make. Additional revisions at the sketch stage are $20 each. Once we've moved into color, the composition is locked, and only minor tweaks are possible without rescoping.</p>
-      </div>
+      </details>
 
-      <div class="faq-item">
-        <h4>What do I actually get when it's finished?</h4>
+      <details class="faq-item">
+        <summary class="faq-q">What do I actually get when it's finished?</summary>
         <p>A high-resolution PNG at 4K or larger, suitable for printing. Layered files (PSD or Procreate) are available on request at no extra charge. A timelapse video can be requested.</p>
-      </div>
+      </details>
 
-      <div class="faq-item">
-        <h4>Can I use the artwork commercially?</h4>
+      <details class="faq-item">
+        <summary class="faq-q">Can I use the artwork commercially?</summary>
         <p>The base price covers personal use with VTT tokens, character sheets, your own campaign, social posts, that kind of thing. For commercial use (selling prints, publishing in a paid product, Kickstarter rewards, anything where the art generates revenue), add 60% to the base price. We'll write the scope into the agreement so you know exactly what's licensed.</p>
-      </div>
+      </details>
 
-      <div class="faq-item">
-        <h4>Do you actually not use AI?</h4>
+      <details class="faq-item">
+        <summary class="faq-q">Do you actually not use AI?</summary>
         <p>Correct. Every piece is painted by hand in Clip Studio Paint, from blank canvas to final render. I'm happy to send a process timelapse, share layered files, or stream the process on twitch if you'd like to watch it be made in real time.</p>
-      </div>
+      </details>
 
-      <div class="faq-item">
-        <h4>Is there anything you won't paint?</h4>
+      <details class="faq-item">
+        <summary class="faq-q">Is there anything you won't paint?</summary>
         <p>I don't take NSFW or hateful works. Beyond that, dark fantasy, horror, body horror, and morally complex characters are all on the table. If you're unsure, just ask.</p>
-      </div>
+      </details>
     </div>
   </section>
+
+  <!-- NO-AI LINE — repositioned to sit with the closing trust signals
+       (testimonials + form). Now it's the bridge from FAQ into proof. -->
+  <div class="no-ai reveal">
+    Every illustration is hand-painted by me. No generative AI is used at any stage. Process timelapses and layered files are available on request.
+    <div style="margin-top: 0.4rem;">
+      <a class="twitch-live" href="https://twitch.tv/ptvincent_" target="_blank" rel="noopener">
+        <span class="live-dot" aria-hidden="true"></span>
+        Watch me paint live on Twitch
+        <span class="schedule"></span>
+      </a>
+    </div>
+  </div>
 
   <!-- TESTIMONIALS — opening tag was missing; JS toggles display via #testimonials-section -->
   <section class="testimonials reveal" id="testimonials-section" style="display:none;">
@@ -2832,6 +3048,49 @@
         <div class="form-status" id="cf-status" aria-live="polite"></div>
       </div>
     </form>
+  </section>
+
+  <!-- ABOUT — moved to bottom of page (closing trust signal rather than
+       opening obstacle). Copy trimmed for mobile-friendly density. -->
+  <section class="about reveal">
+    <h2 class="section-title">About</h2>
+    <div class="section-subtitle">The Artist Behind the Ink</div>
+
+    <div class="divider">
+      <svg viewBox="0 0 240 20" xmlns="http://www.w3.org/2000/svg">
+        <line x1="0" y1="10" x2="100" y2="10" stroke="#c9a24a" stroke-width="0.8" opacity="0.6"/>
+        <line x1="140" y1="10" x2="240" y2="10" stroke="#c9a24a" stroke-width="0.8" opacity="0.6"/>
+        <path d="M100 10 L115 4 L120 10 L115 16 Z" fill="#c9a24a"/>
+        <path d="M140 10 L125 4 L120 10 L125 16 Z" fill="#c9a24a"/>
+        <circle cx="120" cy="10" r="2.5" fill="#e7c875"/>
+      </svg>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-portrait">
+        <!-- corner ornaments -->
+        <svg class="frame-corner tl" viewBox="0 0 40 40"><path d="M0 0 H40 V8 H8 V40 H0 Z" opacity="0.9"/><path d="M12 12 L32 12 M12 12 L12 32" stroke="#c9a24a" stroke-width="0.5" fill="none" opacity="0.6"/></svg>
+        <svg class="frame-corner tr" viewBox="0 0 40 40"><path d="M0 0 H40 V8 H8 V40 H0 Z" opacity="0.9"/></svg>
+        <svg class="frame-corner bl" viewBox="0 0 40 40"><path d="M0 0 H40 V8 H8 V40 H0 Z" opacity="0.9"/></svg>
+        <svg class="frame-corner br" viewBox="0 0 40 40"><path d="M0 0 H40 V8 H8 V40 H0 Z" opacity="0.9"/></svg>
+        <!-- portrait of the artist -->
+        <div class="silhouette">
+          <img src="art/_portrait.png" alt="Parker Vincent" class="portrait-img" onerror="this.onerror=null;this.src='art/_portrait.jpg';">
+        </div>
+        <div class="sigil-text">✦ Parker Vincent ✦</div>
+      </div>
+
+      <div class="about-text">
+        <h3>Hello,</h3>
+        <p class="drop-cap">
+          I'm Parker, a digital illustrator on the Virginia coast. I paint fantasy — knights, forest creatures, coastlines, and darker things when the idea calls for it — mostly for tabletop players, DMs, streamers, and people building their own worlds.
+        </p>
+        <p>
+          Every piece is painted from your brief, and I send a sketch before committing to color so we can make sure it's right. If something here stands out, I'd like to hear what you're working on.
+        </p>
+        <div class="meta">Character Design · Environments · Creature Illustration</div>
+      </div>
+    </div>
   </section>
 
   <!-- FINAL CTA -->
@@ -3012,6 +3271,11 @@
   </div>
 </div>
 
+<!-- STICKY MOBILE COMMISSION CTA — visible only on small screens, only when
+     the user is on the home page, and only when the commission form isn't
+     already in view. Toggled by JS via .visible class. -->
+<a class="sticky-cta" id="sticky-cta" data-scroll="commission-form" aria-label="Jump to commission form">Commission →</a>
+
 <!-- LIGHTBOX (shared across pages) -->
 <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog">
   <button class="lightbox-close" id="lightbox-close" aria-label="Close">×</button>
@@ -3109,6 +3373,106 @@ document.addEventListener('click', (e) => {
     scrollToSection(id);
   }
 });
+
+/* ============ MOBILE NAV TOGGLE ============ */
+/* Hamburger opens a full-screen overlay menu. Items inside use the same
+   data-route / data-scroll attributes as the desktop nav, so existing
+   delegation handles routing — we only need to close the menu on click. */
+(function setupMobileNav() {
+  const toggle = document.getElementById('nav-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const closeBtn = document.getElementById('mobile-menu-close');
+  if (!toggle || !menu) return;
+
+  function open() {
+    menu.classList.add('open');
+    menu.setAttribute('aria-hidden', 'false');
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', 'Close menu');
+    document.body.style.overflow = 'hidden';
+  }
+  function close() {
+    menu.classList.remove('open');
+    menu.setAttribute('aria-hidden', 'true');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Open menu');
+    document.body.style.overflow = '';
+  }
+
+  toggle.addEventListener('click', () => {
+    menu.classList.contains('open') ? close() : open();
+  });
+  if (closeBtn) closeBtn.addEventListener('click', close);
+
+  // Close after any nav action inside the menu
+  menu.addEventListener('click', (e) => {
+    if (e.target.closest('[data-route], [data-scroll]')) close();
+  });
+
+  // Escape closes
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menu.classList.contains('open')) close();
+  });
+
+  // If the viewport widens past the breakpoint while open, close it
+  matchMedia('(min-width: 721px)').addEventListener('change', (m) => {
+    if (m.matches && menu.classList.contains('open')) close();
+  });
+})();
+
+/* ============ STICKY MOBILE CTA ============ */
+/* Show the floating "Commission →" button only on:
+   - mobile (CSS handles this — hidden via media query above 720px)
+   - the home page
+   - when the user has scrolled past the hero AND the form isn't on screen
+   The IntersectionObserver hides the CTA whenever the form comes into
+   view, so the floating button never competes with the form's own button. */
+(function setupStickyCTA() {
+  const cta = document.getElementById('sticky-cta');
+  if (!cta) return;
+  const form = document.getElementById('commission-form');
+  const hero = document.querySelector('.hero');
+
+  let pastHero = false;
+  let formVisible = false;
+
+  function updateVisibility() {
+    const onHome = document.getElementById('page-home').classList.contains('active');
+    const shouldShow = onHome && pastHero && !formVisible;
+    cta.classList.toggle('visible', shouldShow);
+  }
+
+  if ('IntersectionObserver' in window) {
+    if (hero) {
+      const heroObs = new IntersectionObserver((entries) => {
+        // pastHero is true once the hero is mostly off-screen
+        pastHero = !entries[0].isIntersecting;
+        updateVisibility();
+      }, { threshold: 0.15 });
+      heroObs.observe(hero);
+    }
+    if (form) {
+      const formObs = new IntersectionObserver((entries) => {
+        formVisible = entries[0].isIntersecting;
+        updateVisibility();
+      }, { threshold: 0.2 });
+      formObs.observe(form);
+    }
+  } else {
+    // Fallback for old browsers — just show after any scroll
+    pastHero = true;
+    updateVisibility();
+  }
+
+  // Re-check whenever the page route changes (custom event would be cleaner,
+  // but the existing goto() doesn't dispatch one — poll on click instead)
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('[data-route]')) {
+      // Wait for goto() to run + the page-fade animation to start
+      setTimeout(updateVisibility, 50);
+    }
+  });
+})();
 
 /* ============ COMMISSION FORM ============ */
 /* Submits the form via Formspree AJAX. Keeps the user on the page,
@@ -3610,7 +3974,9 @@ function setupCursorGlow() {
 /* ============ EMBERS (gold + blue mix) ============ */
 function spawnEmbers() {
   const host = document.getElementById('embers');
-  for (let i = 0; i < 24; i++) {
+  // Fewer particles on mobile for performance — box-shadowed animations are heavy on small GPUs
+  const count = window.innerWidth <= 720 ? 8 : 24;
+  for (let i = 0; i < count; i++) {
     const e = document.createElement('div');
     e.className = 'ember' + (Math.random() < 0.35 ? ' blue' : '');
     e.style.left = Math.random() * 100 + '%';
