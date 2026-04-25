@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tales From The Ether — Parker Vincent</title>
+<title>Tales From The Ether · Parker Vincent</title>
 <meta name="description" content="Dark fantasy art and stories by Parker Vincent. A portfolio of characters, creatures, and environments with the tales behind each piece.">
 <meta name="author" content="Parker Vincent">
 <meta name="theme-color" content="#07060a">
@@ -1594,7 +1594,7 @@
     </div>
 
     <p class="subtitle">
-      I bring characters, creatures, and villains to life for tabletop players, dungeon masters, and fellow world-builders. Painted by hand, rendered in shadow and gold, every commission a story of its own.
+      I bring characters, creatures, and villains to life for tabletop players, dungeon masters, and fellow world-builders.
     </p>
 
     <div class="cta-row">
@@ -1637,13 +1637,13 @@
       <div class="about-text">
         <h3>Hello</h3>
         <p class="drop-cap">
-          I'm Parker — a digital illustrator and self-taught concept artist working out of the Virginia coast. My work lives in the darker corners of fantasy: hooded warlocks and half-forgotten gods, crocodilian warlords and crystal-veined caverns, giants of crustacean and armor alike. I build worlds in ink and then write about how they ended.
+          I'm Parker, a digital illustrator based on the Virginia coast. I paint the darker side of fantasy. Hooded warlocks, half-forgotten gods, crocodilian warlords, the beasts that crawl out of caverns nobody wants to map. If that's the kind of art you've been looking for, you're in the right place.
         </p>
         <p>
-          I illustrate for tabletop players, dungeon masters, streamers, and fellow world-builders. Each commission is a collaboration — your character, your creature, your villain, rendered with the weight and menace it deserves. I work in painted busts, half-bodies, full illustrations, and creature design sheets, with a particular fondness for villains and the things that lurk beyond the firelight.
+          Most of my work is for tabletop players, dungeon masters, streamers, and world-builders. The party portrait you've been meaning to get done. The villain your players have been running from for the last six sessions. The creature on page forty of your homebrew bestiary that nobody has ever drawn before. Bring me what you have, even if it's just a vague idea, and we'll figure out the rest together.
         </p>
         <p>
-          This site is a portfolio of my original work and the stories behind it. Every illustration here has a tale attached — open the journal and read.
+          Every piece is hand-painted from your brief, with a sketch sent for your approval before I touch color. If something here catches your eye, scroll down a little further or send me an email. I'd love to hear what you're working on.
         </p>
         <div class="meta">Dark Fantasy · Creature Design · Character Illustration</div>
       </div>
@@ -1691,12 +1691,12 @@
       <div class="craft-card reveal reveal-delay-1">
         <div class="numeral">I</div>
         <h4>Character Portraits</h4>
-        <p>Busts, half-bodies, and full illustrations of your heroes and villains. Painted with care, built from your brief, rendered in the dark-fantasy register — warlocks, tieflings, revenants, or whatever stalks your campaign.</p>
+        <p>Busts, half-bodies, and full illustrations of your heroes and villains. Painted with care, built from your brief, rendered in the dark-fantasy register. Warlocks, tieflings, revenants, or whatever stalks your campaign.</p>
       </div>
       <div class="craft-card reveal reveal-delay-2">
         <div class="numeral">II</div>
         <h4>Creature & Villain Design</h4>
-        <p>Homebrew monsters, BBEGs, eldritch patrons, and the unnamed things at the end of the dungeon. Full design sheets available — anatomy, silhouette, color logic. A specialty of mine.</p>
+        <p>Homebrew monsters, BBEGs, eldritch patrons, and the unnamed things at the end of the dungeon. Full design sheets available, including anatomy, silhouette, and color logic. A specialty of mine.</p>
       </div>
       <div class="craft-card reveal reveal-delay-3">
         <div class="numeral">III</div>
@@ -1728,7 +1728,7 @@
       <div class="process-step reveal reveal-delay-1">
         <div class="step-num">01</div>
         <h4>Reach Out</h4>
-        <p>Email me with your idea — character backstory, reference images, mood, anything you have. Don't worry if it's rough; the conversation is part of the process.</p>
+        <p>Email me with your idea: character backstory, reference images, mood, anything you have. Don't worry if it's rough; the conversation is part of the process.</p>
       </div>
       <div class="process-step reveal reveal-delay-2">
         <div class="step-num">02</div>
@@ -1766,7 +1766,7 @@
     <div class="final-cta-inner">
       <div class="cta-glow"></div>
       <h2>Have a Character in Mind?</h2>
-      <p>Whether it's a single portrait or an entire pantheon — I'd love to hear about it. Tell me what you're building, and we'll bring it to the page together.</p>
+      <p>Whether it's a single portrait or an entire pantheon, I'd love to hear about it. Tell me what you're building, and we'll bring it to the page together.</p>
       <div class="cta-row" style="justify-content:center;">
         <a class="btn" href="mailto:ptvincentptv@gmail.com?subject=Commission%20Inquiry">Start a Commission</a>
         <a class="btn ghost" data-route="contact">Other Ways to Reach Me</a>
@@ -1843,7 +1843,7 @@
             <div class="art-frame" id="art-frame">
               <!-- art injected -->
             </div>
-            <div class="art-caption" id="art-caption">— Plate I —</div>
+            <div class="art-caption" id="art-caption">Plate I</div>
           </div>
           <!-- right page: story -->
           <div class="page-right">
@@ -2046,7 +2046,7 @@ function renderEntry() {
   if (list.length === 0) {
     document.getElementById('art-frame').innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--parchment-dark);font-style:italic;font-family:'IM Fell English',serif;text-align:center;padding:2rem;">${entriesLoaded ? 'No entries yet.' : 'Loading...'}</div>`;
     document.getElementById('story').innerHTML = `<p style="font-style:italic;color:var(--parchment-dark);text-align:center;margin-top:2rem;">${entriesLoaded ? 'This journal is waiting for its first entry.' : ''}</p>`;
-    document.getElementById('page-count').textContent = '—';
+    document.getElementById('page-count').textContent = '·';
     document.getElementById('art-caption').textContent = '';
     document.getElementById('prev-btn').disabled = true;
     document.getElementById('next-btn').disabled = true;
@@ -2057,7 +2057,7 @@ function renderEntry() {
 
   const entry = list[currentIndex];
   document.getElementById('art-frame').innerHTML = renderArt(entry);
-  document.getElementById('art-caption').textContent = entry.plate ? `— ${entry.plate} —` : '';
+  document.getElementById('art-caption').textContent = entry.plate ? entry.plate : '';
   document.getElementById('story').innerHTML = renderStoryHTML(entry);
   document.getElementById('page-count').textContent = `${roman(currentIndex)} / ${roman(list.length - 1)}`;
   document.getElementById('prev-btn').disabled = list.length <= 1;
@@ -2215,7 +2215,7 @@ async function loadGalleryImages() {
     paths = entries.map(e => e.image).filter(Boolean);
     if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
       console.info(
-        '[Gallery] Running locally — showing only images referenced in entries.json. ' +
+        '[Gallery] Running locally. Showing only images referenced in entries.json. ' +
         'To preview all images from the art/ folder locally, run `python3 build.py` ' +
         'in this folder to generate a gallery.json manifest.'
       );
