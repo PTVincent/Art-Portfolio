@@ -4900,63 +4900,6 @@ document.addEventListener('click', async (e) => {
     btn.classList.remove('copied');
   }, 2400);
 });
-
-/* ============ EMAIL CAPTURE / "JOIN THE ETHER" ============
-   Submits to Kit's form endpoint when wired up. Until KIT_FORM_ACTION_URL
-   is replaced with a real Kit form URL, the handler still gives the user
-   a polite confirmation so the section never looks broken — no real
-   subscriptions get logged. */
-(function setupEtherForm() {
-  const form = document.getElementById('ether-form');
-  if (!form) return;
-  const status = document.getElementById('ether-status');
-
-  function setStatus(msg, kind) {
-    status.textContent = msg || '';
-    status.classList.remove('error', 'success');
-    if (kind) status.classList.add(kind);
-  }
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const emailEl = form.querySelector('input[name="email_address"]');
-    const email = emailEl ? emailEl.value.trim() : '';
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setStatus('That email address looks off — could you double-check it?', 'error');
-      return;
-    }
-
-    const action = form.getAttribute('action');
-    // If the Kit URL hasn't been wired in yet, give a polite local-only confirm
-    if (!action || action === 'KIT_FORM_ACTION_URL') {
-      setStatus('Thanks — you\'ll be added when the dispatch goes out.', 'success');
-      form.reset();
-      return;
-    }
-
-    setStatus('Sending…');
-    try {
-      const fd = new FormData(form);
-      const res = await fetch(action, {
-        method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: fd
-      });
-      if (res.ok) {
-        setStatus('You\'re in. Look for the welcome dispatch shortly.', 'success');
-        form.reset();
-      } else {
-        setStatus('Something went wrong. Try again, or email me directly.', 'error');
-      }
-    } catch {
-      setStatus('Couldn\'t reach the server. Check your connection and try again.', 'error');
-    }
-  });
-})();
-
-window.addEventListener('load', () => {
-  setTimeout(triggerRevealsInView, 50);
-});
 </script>
 </body>
 </html>
