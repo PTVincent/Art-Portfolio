@@ -4490,11 +4490,7 @@ async function loadGalleryImages() {
   let paths = null;
 
   // Priority 1: gallery.json manifest
-  try {
-    paths = await fetchGalleryManifest();
-  } catch (err) {
-    console.info('[Gallery] gallery.json not found or invalid');
-  }
+  paths = await fetchGalleryManifest();
 
   // Priority 2: GitHub API
   if (!paths || paths.length === 0) {
@@ -4508,18 +4504,14 @@ async function loadGalleryImages() {
     }
   }
 
-  // Priority 3: fall back to entries.json images
+  // Priority 3: fall back to whatever is referenced in entries.json
   if (!paths || paths.length === 0) {
-    paths = entries
-      .filter(e => e.image)
-      .map(e => e.image);
-    
-    if (paths.length === 0) {
-      console.warn('[Gallery] No images found from any source');
-    } else if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+    paths = entries.map(e => e.image).filter(Boolean);
+    if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
       console.info(
-        '[Gallery] Running locally. Showing images from entries.json. ' +
-        'To preview all images from the art/ folder locally, create a gallery.json file.'
+        '[Gallery] Running locally. Showing only images referenced in entries.json. ' +
+        'To preview all images from the art/ folder locally, run `python3 build.py` ' +
+        'in this folder to generate a gallery.json manifest.'
       );
     }
   }
@@ -4527,7 +4519,7 @@ async function loadGalleryImages() {
   // De-dupe while preserving order
   paths = Array.from(new Set(paths));
 
-  // Build the galleryImages data model
+  // Build the galleryImages data model — each path paired with its entry (if any)
   galleryImages = paths.map(path => {
     const entry = entries.find(e => e.image === path) || null;
     return {
