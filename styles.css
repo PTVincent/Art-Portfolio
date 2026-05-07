@@ -134,32 +134,26 @@ html, body {
 }
 
 /* Dust motes — the bright-mode counterpart to embers.
-   On a cream background, real dust motes read as small DARK specks
-   that catch light, not as bright glows. Each has a soft warm halo. */
+   Soft, slow, drifting in random directions like sunlit dust in a study. */
 .mote {
   position: absolute;
-  width: 4px; height: 4px;
-  background: rgba(94, 70, 18, 0.7);
+  width: 3px; height: 3px;
+  background: rgba(231, 200, 117, 0.85);
   border-radius: 50%;
-  box-shadow:
-    0 0 6px rgba(148, 109, 28, 0.45),
-    0 0 14px rgba(231, 200, 117, 0.3);
+  box-shadow: 0 0 6px rgba(231, 200, 117, 0.55), 0 0 14px rgba(231, 200, 117, 0.25);
   opacity: 0;
   animation: drift linear infinite;
-  filter: blur(0.3px);
-  mix-blend-mode: multiply;
+  filter: blur(0.4px);
 }
 .mote.cool {
-  background: rgba(31, 58, 74, 0.55);
-  box-shadow:
-    0 0 6px rgba(46, 90, 115, 0.4),
-    0 0 14px rgba(127, 196, 230, 0.25);
+  background: rgba(127, 196, 230, 0.7);
+  box-shadow: 0 0 6px rgba(127, 196, 230, 0.5), 0 0 14px rgba(127, 196, 230, 0.2);
 }
 @keyframes drift {
   0%   { transform: translate(0, 0) scale(0.6); opacity: 0; }
-  10%  { opacity: 0.85; }
-  50%  { transform: translate(var(--mote-x, 60px), -40vh) scale(1); opacity: 0.7; }
-  90%  { opacity: 0.45; }
+  10%  { opacity: 0.8; }
+  50%  { transform: translate(var(--mote-x, 60px), -40vh) scale(1); opacity: 0.6; }
+  90%  { opacity: 0.4; }
   100% { transform: translate(calc(var(--mote-x, 60px) * 1.6), -90vh) scale(0.7); opacity: 0; }
 }
 
@@ -275,53 +269,47 @@ nav.main ul a:hover::after, nav.main ul a.active::after {
   left: 0;
 }
 
-/* ============ THEME TOGGLE ============
-   Fixed in the bottom-right corner of the viewport. Sun shows in bright
-   mode, moon in dark mode — they cross-fade on switch.
-   On mobile, sits below the sticky-cta (which is bumped up to clear it). */
+/* ============ THEME TOGGLE ============ */
+/* Fixed to the bottom-left corner of the viewport on all screen sizes.
+   Sun icon visible in bright mode, moon icon in dark mode — they cross-fade. */
 .theme-toggle {
   position: fixed;
-  bottom: 1.4rem;
-  right: 1.4rem;
-  z-index: 47;
+  bottom: 1.25rem;
+  left: 1.25rem;
+  z-index: 60;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50px;
-  height: 50px;
-  padding: 0;
-  background: linear-gradient(180deg, rgba(7, 6, 10, 0.85), rgba(17, 13, 10, 0.92));
-  border: 1px solid rgba(201, 162, 74, 0.4);
+  width: 44px;
+  height: 44px;
+  background: rgba(7, 6, 10, 0.75);
+  border: 1px solid rgba(201, 162, 74, 0.35);
   border-radius: 50%;
   color: var(--gold);
   cursor: pointer;
   overflow: hidden;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  box-shadow:
-    0 6px 20px rgba(0, 0, 0, 0.4),
-    0 0 16px rgba(201, 162, 74, 0.15);
   transition: border-color 0.4s ease, color 0.4s ease, transform 0.4s ease,
               box-shadow 0.4s ease, background 0.4s ease;
   -webkit-tap-highlight-color: transparent;
+  /* Ensure it's easily tappable on mobile (min 44×44 already satisfied) */
+  touch-action: manipulation;
 }
 .theme-toggle:hover {
   border-color: var(--gold-bright);
   color: var(--gold-bright);
-  transform: rotate(20deg) scale(1.05);
-  box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.5),
-    0 0 22px rgba(201, 162, 74, 0.35),
-    0 0 36px rgba(127, 196, 230, 0.18);
+  transform: rotate(20deg);
+  box-shadow: 0 0 16px rgba(201, 162, 74, 0.3), 0 0 28px rgba(127, 196, 230, 0.15);
 }
 .theme-toggle:focus-visible {
-  outline: 2px dashed var(--twilight-glow);
-  outline-offset: 4px;
+  outline: 1px dashed var(--twilight-glow);
+  outline-offset: 3px;
 }
 .theme-icon {
   position: absolute;
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 /* Default (bright mode): show sun, hide moon */
@@ -343,20 +331,22 @@ nav.main ul a:hover::after, nav.main ul a.active::after {
   transform: scale(1) rotate(0deg);
 }
 
-@media (max-width: 720px) {
+/* On mobile the sticky CTA sits bottom-right so there's no conflict.
+   Slightly reduce size for very small screens for a tidier feel. */
+@media (max-width: 480px) {
   .theme-toggle {
+    width: 40px;
+    height: 40px;
     bottom: 1rem;
-    right: 1rem;
-    width: 44px;
-    height: 44px;
+    left: 1rem;
   }
-  .theme-icon { width: 21px; height: 21px; }
+  .theme-icon { width: 19px; height: 19px; }
 }
 
 /* ============ STICKY MOBILE CTA ============ */
 .sticky-cta {
   position: fixed;
-  bottom: 5rem;
+  bottom: 1rem;
   right: 1rem;
   z-index: 45;
   padding: 0.85rem 1.4rem;
@@ -3066,37 +3056,28 @@ footer p {
   --sepia-2:           #b89e6a;
 
   /* ---- Foreground / text ----
-     The "parchment" token now means "the dark ink you write ON parchment".
-     Pushed to nearly black for high readability — secondary text comes
-     from --parchment-2 and --parchment-dark, which are also darker now. */
-  --parchment:         #1a1208;
-  --parchment-2:       #36280f;
-  --parchment-dark:    #54401e;
-  --ink-on-parchment:  #1a1208;
+     The "parchment" token now means "the dark ink you write ON parchment". */
+  --parchment:         #2a1a0c;
+  --parchment-2:       #4a3318;
+  --parchment-dark:    #6e5630;
+  --ink-on-parchment:  #2a1a0c;
 
   /* ---- Gold accents ----
-     The semantic "bright = strongest emphasis" still holds; on a light bg
-     that means DARKER, more saturated golds. Rebalanced so small text
-     using --gold-bright (prices, hover links) is comfortably readable.
-       gold-bright = strongest emphasis (deepest)
-       gold        = standard text/heading gold
-       gold-dim    = medium subtle (✦ markers, dotted underlines)
-       gold-deep   = decorative + visible borders (subtle but defined) */
-  --gold:              #7a5712;
-  --gold-bright:       #5a3e08;
-  --gold-dim:          #b8923f;
-  --gold-deep:         #a07a25;
+     Dropped a few notches for contrast on a cream background.
+     Bright stays vivid; dim/deep go quite dark for borders & dividers. */
+  --gold:              #946d1c;
+  --gold-bright:       #b8902f;
+  --gold-dim:          #7a5a17;
+  --gold-deep:         #4a3a10;
 
   /* ---- Twilight blue accents ----
-     Same logic. Glow/bright are now DEEP teals for italic accent text
-     so they actually read on cream. Deep is now the LIGHTER variant
-     (used for subtle big numerals — should be barely-there). */
-  --twilight:          #2d5868;
-  --twilight-glow:     #224654;
-  --twilight-bright:   #143544;
-  --twilight-deep:     #6a8eaa;
+     Light-blue cyans become deeper teal/slate so the accent reads on cream. */
+  --twilight:          #3d6378;
+  --twilight-glow:     #4a7a92;
+  --twilight-bright:   #2e5a73;
+  --twilight-deep:     #1f3a4a;
   --twilight-ink:      #15222e;
-  --twilight-mid:      #4d758a;
+  --twilight-mid:      #5a85a0;
 
   --blood:             #8a2828;
 }
@@ -3108,75 +3089,31 @@ footer p {
   transition: background-color 0.7s ease, color 0.7s ease;
 }
 
-/* ---- ATMOSPHERE: tone down the radial glows so they sit on cream nicely.
-   On cream, "glow" reads better as a soft DARK ambient tint (multiply-style)
-   than as a bright tint, since we can't actually emit light on a light bg.
-   The values below are deeper than dark-mode equivalents so they actually
-   register on cream. ---- */
+/* ---- ATMOSPHERE: tone down the radial glows so they sit on cream nicely ---- */
 [data-theme="light"] .atmosphere::before {
   background:
-    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(46, 90, 115, 0.22), transparent 70%),
-    radial-gradient(ellipse 60% 40% at 15% 90%, rgba(148, 109, 28, 0.18), transparent 70%),
-    radial-gradient(ellipse 70% 50% at 90% 40%, rgba(46, 90, 115, 0.20), transparent 70%),
-    radial-gradient(ellipse 40% 30% at 10% 30%, rgba(31, 58, 74, 0.16), transparent 65%);
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(127, 196, 230, 0.18), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 15% 90%, rgba(201, 162, 74, 0.12), transparent 70%),
+    radial-gradient(ellipse 70% 50% at 90% 40%, rgba(61, 99, 120, 0.14), transparent 70%),
+    radial-gradient(ellipse 40% 30% at 10% 30%, rgba(46, 74, 95, 0.10), transparent 65%);
 }
 [data-theme="light"] .atmosphere::after {
-  opacity: 0.4;
-  background-image:
-    repeating-linear-gradient(0deg, rgba(60, 40, 20, 0.04) 0, rgba(60, 40, 20, 0.04) 1px, transparent 1px, transparent 3px);
-  mix-blend-mode: multiply;
+  opacity: 0.35;
 }
 [data-theme="light"] .grain {
-  opacity: 0.10;
+  opacity: 0.06;
   mix-blend-mode: multiply;
 }
-/* Cursor glow — a warm warm halo using multiply blend so it darkens the
-   parchment slightly into a "spotlight on a desk" effect. */
+/* Cursor glow — softer warm tint instead of fire-on-black */
 [data-theme="light"] .cursor-glow {
   background:
     radial-gradient(circle at center,
-      rgba(184, 144, 47, 0.22) 0%,
-      rgba(148, 109, 28, 0.16) 15%,
-      rgba(46, 90, 115, 0.12) 35%,
-      rgba(31, 58, 74, 0.07) 55%,
+      rgba(231, 200, 117, 0.14) 0%,
+      rgba(201, 162, 74, 0.09) 15%,
+      rgba(127, 196, 230, 0.07) 35%,
+      rgba(61, 99, 120, 0.04) 55%,
       transparent 70%);
   mix-blend-mode: multiply;
-}
-
-/* ---- READABILITY: kill compounding opacity on small accent text ----
-   Several small italic/uppercase elements use color: var(--twilight-glow)
-   *with* opacity: 0.8 layered on top — that double-dim turns into a
-   contrast failure on cream. We darken the underlying color globally
-   above; here we also set opacity to 1 so the dim layer is gone. */
-[data-theme="light"] .section-subtitle,
-[data-theme="light"] .ether-list .eyebrow,
-[data-theme="light"] .pricing-card .price-note,
-[data-theme="light"] .sketch-tier .sketch-flag,
-[data-theme="light"] .no-ai,
-[data-theme="light"] .about-text .meta {
-  opacity: 1;
-}
-
-/* Card/gallery borders — gold-deep is a touch subtle on cream; bump
-   the borders specifically so cards still read as framed objects. */
-[data-theme="light"] .featured-card,
-[data-theme="light"] .gallery-item {
-  border-color: rgba(148, 109, 28, 0.45);
-}
-[data-theme="light"] .gallery-item::before {
-  border-color: rgba(148, 109, 28, 0.18);
-}
-
-/* Gallery hover overlay — keep it light in light mode so the dark text
-   on top stays readable (mirrors the .featured-card .overlay treatment). */
-[data-theme="light"] .gallery-item .g-overlay {
-  background: linear-gradient(to top,
-    rgba(245, 237, 214, 0.95) 0%,
-    rgba(245, 237, 214, 0.4) 70%,
-    transparent 100%);
-}
-[data-theme="light"] .gallery-item .g-title {
-  text-shadow: 0 1px 2px rgba(255, 250, 235, 0.6);
 }
 
 /* ---- NAV ---- */
@@ -3556,9 +3493,12 @@ footer p {
 
 /* ---- THEME TOGGLE: tweak in light mode ---- */
 [data-theme="light"] .theme-toggle {
+  background: rgba(245, 237, 214, 0.82);
   border-color: rgba(148, 109, 28, 0.4);
+  color: var(--gold-dim);
 }
 [data-theme="light"] .theme-toggle:hover {
+  background: rgba(245, 237, 214, 0.96);
   box-shadow: 0 0 14px rgba(184, 144, 47, 0.25), 0 0 24px rgba(46, 90, 115, 0.15);
 }
 
