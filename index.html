@@ -6,7 +6,24 @@
 <title>Tales From The Ether: Dark Fantasy & D&D Commission Art by Parker Vincent</title>
 <meta name="description" content="Hand-painted D&D and dark fantasy commission art by Parker Vincent — 100% human-drawn, zero AI. Custom character portraits, creature designs, and environments for TTRPG players, dungeon masters, and worldbuilders. Busts from $65, half-body $130, full-body $210. Booking now.">
 <meta name="author" content="Parker Vincent">
-<meta name="theme-color" content="#07060a">
+<meta name="theme-color" content="#f4ebd7" id="theme-color-meta">
+
+<script>
+/* Early-init: applies the saved theme BEFORE the stylesheet loads,
+   so the page never flashes the wrong colors on load.
+   Default is 'light' (the new bright/daylight aesthetic). */
+(function () {
+  try {
+    var saved = localStorage.getItem('tfte-theme');
+    var theme = (saved === 'dark' || saved === 'light') ? saved : 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', theme === 'dark' ? '#07060a' : '#f4ebd7');
+  } catch (e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+</script>
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Tales From The Ether">
@@ -112,6 +129,24 @@
     <li><a data-route="terms">Terms</a></li>
     <li><a data-route="contact">Contact</a></li>
   </ul>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode" title="Switch to dark mode" type="button">
+    <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="12" r="4.2" fill="currentColor"/>
+      <g stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+        <line x1="12" y1="2.5" x2="12" y2="5"/>
+        <line x1="12" y1="19" x2="12" y2="21.5"/>
+        <line x1="2.5" y1="12" x2="5" y2="12"/>
+        <line x1="19" y1="12" x2="21.5" y2="12"/>
+        <line x1="5.2" y1="5.2" x2="7" y2="7"/>
+        <line x1="17" y1="17" x2="18.8" y2="18.8"/>
+        <line x1="5.2" y1="18.8" x2="7" y2="17"/>
+        <line x1="17" y1="7" x2="18.8" y2="5.2"/>
+      </g>
+    </svg>
+    <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M20.5 14.4a8 8 0 1 1-10.9-10.9 0.6 0.6 0 0 1 0.8 0.7 6.4 6.4 0 0 0 9.4 7.6 0.6 0.6 0 0 1 0.7 0.8 8 8 0 0 1-0 1.8z" fill="currentColor"/>
+    </svg>
+  </button>
   <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
     <span class="nav-toggle-bar"></span>
     <span class="nav-toggle-bar"></span>
