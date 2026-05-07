@@ -764,9 +764,19 @@ function setupCursorGlow() {
   document.addEventListener('mouseleave', () => glow.classList.remove('active'));
 }
 
-/* ============ EMBERS (gold + blue mix) ============ */
+/* ============ ATMOSPHERE PARTICLES (theme-aware) ============
+   Dark mode: gold + blue embers rising like a campfire.
+   Light mode: warm dust motes drifting in stray sunbeams.
+   Both use the same #embers host so swapping is just a matter of
+   wiping the children and respawning. */
+function clearParticles() {
+  const host = document.getElementById('embers');
+  if (host) host.innerHTML = '';
+}
+
 function spawnEmbers() {
   const host = document.getElementById('embers');
+  if (!host) return;
   // Fewer particles on mobile for performance — box-shadowed animations are heavy on small GPUs
   const count = window.innerWidth <= 720 ? 8 : 24;
   for (let i = 0; i < count; i++) {
@@ -780,6 +790,71 @@ function spawnEmbers() {
     e.style.width = e.style.height = size + 'px';
     host.appendChild(e);
   }
+}
+
+function spawnMotes() {
+  const host = document.getElementById('embers');
+  if (!host) return;
+  // Slightly fewer motes than embers — they're larger and more diffuse
+  const count = window.innerWidth <= 720 ? 10 : 22;
+  for (let i = 0; i < count; i++) {
+    const m = document.createElement('div');
+    m.className = 'mote' + (Math.random() < 0.3 ? ' cool' : '');
+    // Spread starting positions across the full viewport, not just the bottom
+    m.style.left = Math.random() * 100 + '%';
+    m.style.top = (40 + Math.random() * 60) + '%';
+    m.style.animationDuration = (16 + Math.random() * 18) + 's';
+    m.style.animationDelay = (Math.random() * 18) + 's';
+    // Drift sideways on a long arc — positive or negative
+    m.style.setProperty('--mote-x', (Math.random() * 200 - 100) + 'px');
+    const size = (2 + Math.random() * 2.5);
+    m.style.width = m.style.height = size + 'px';
+    host.appendChild(m);
+  }
+}
+
+function spawnParticlesForTheme(theme) {
+  clearParticles();
+  if (theme === 'dark') spawnEmbers();
+  else spawnMotes();
+}
+
+/* ============ THEME TOGGLE ============
+   Persists choice in localStorage under 'tfte-theme'. The early-init script
+   in <head> applies the saved theme before paint to avoid a flash; this
+   controller handles user toggles + the meta theme-color sync. */
+function setupThemeToggle() {
+  const btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+
+  const meta = document.getElementById('theme-color-meta')
+            || document.querySelector('meta[name="theme-color"]');
+
+  function currentTheme() {
+    return document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+  }
+
+  function applyTheme(theme, persist) {
+    document.documentElement.setAttribute('data-theme', theme);
+    if (meta) meta.setAttribute('content', theme === 'dark' ? '#07060a' : '#f4ebd7');
+    // Update the button's accessibility labels
+    const nextLabel = theme === 'dark' ? 'Switch to bright mode' : 'Switch to dark mode';
+    btn.setAttribute('aria-label', nextLabel);
+    btn.setAttribute('title', nextLabel);
+    // Respawn the right particles
+    spawnParticlesForTheme(theme);
+    if (persist) {
+      try { localStorage.setItem('tfte-theme', theme); } catch (e) { /* private mode etc. */ }
+    }
+  }
+
+  // Sync labels to whatever the early-init script applied
+  applyTheme(currentTheme(), false);
+
+  btn.addEventListener('click', () => {
+    const next = currentTheme() === 'dark' ? 'light' : 'dark';
+    applyTheme(next, true);
+  });
 }
 
 /* ============ TESTIMONIALS ============ */
@@ -845,7 +920,7 @@ async function loadEntries() {
 /* ============ INIT ============ */
 setupReveals();
 setupCursorGlow();
-spawnEmbers();
+setupThemeToggle();          // wires the toggle button + spawns particles for current theme
 loadEntries();
 
 /* ============ INITIAL HASH ROUTING ============
